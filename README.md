@@ -83,6 +83,33 @@ create: create [ARG]
 
   * **update with dictionary:** `<class name>.update(<id>, <dictionary representation>)`
 
+# AirBnB Clone Phase #3
+
+Tasks:
+
+1. Making sure all unittests pass and adding more tests.
+
+2. Review the code to if there any logical errors, are all cases fully implemented, are the new automated tests sufficient for the new code, does the new code conform to existing style guidelines?.
+
+3. Update DBStorage and FileStorage, adding two new methods: 1. A method to retrieve one object 2. A method to count the number of objects in storage.
+
+4. Start the API.
+
+5. Create an endpoint that retrieves the number of each objects by type.
+
+6. In api/v1/app.py, create a handler for 404 errors that returns a JSON-formatted 404 status code response. The content should be: "error": "Not found".
+
+7. Create a new view for `State` objects that handles all default RestFul API actions.
+
+8. Same as `State`, create a new view for City objects that handles all default RestFul API actions.
+
+9. Create a new view for `Amenity` objects that handles all default RestFul API actions.
+
+10. Create a new view for `User` object that handles all default RestFul API actions.
+
+11. Create a new view for `Place` objects that handles all default RestFul API actions.
+
+12. Create a new view for `Review` object that handles all default RestFul API actions.
 
 #### Continuous Integration
 
@@ -95,6 +122,8 @@ github repo
 * David John Coleman II, [davidjohncoleman.com](http://www.davidjohncoleman.com/)
 * Kimberly Wong, [kjowong](http://github.com/kjowong) | [@kjowong](http://twitter.com/kjowong) | [kjowong@gmail.com](kjowong@gmail.com)
 * Carrie Ybay, [hicarrie](http://github.com/hicarrie) | [@hicarrie_](http://twitter.com/hicarrie_)
+* Spencer Cheng, [spencerhcheng](https://github.com/spencerhcheng) | [@spencerhcheng ](https://twitter.com/spencerhcheng)
+* Katya Kalache, [katyakalache](https://github.com/KatyaKalache) | [@katyakalache](https://twitter.com/KatyaKalache)
 
 ## License
 
