@@ -55,6 +55,22 @@ class DBStorage:
     def new(self, obj):
         """ adds objects to current database session """
         self.__session.add(obj)
+    def all(self, cls=None):
+        """ returns a dictionary of all objects """
+        obj_dict = {}
+        if cls:
+            obj_class = self.__session.query(self.CNC.get(cls)).all()
+            for item in obj_class:
+                obj_dict[item.id] = item
+            return obj_dict
+        for class_name in self.CNC:
+            if class_name == 'BaseModel':
+                continue
+            obj_class = self.__session.query(
+                self.CNC.get(class_name)).all()
+            for item in obj_class:
+                obj_dict[item.id] = item
+        return obj_dict
 
     def save(self):
         """ commits all changes of current database session """
@@ -78,3 +94,15 @@ class DBStorage:
             calls remove() on private session attribute (self.session)
         """
         self.__session.remove()
+
+    def get(self, cls, id):
+        """
+        Retrieves object based on class name and ID
+        """
+        return(self.all(cls).get(id))
+
+    def count(self, cls=None):
+        """
+        count the number of objects in storage
+        """
+        return (len(self.all(cls)))
