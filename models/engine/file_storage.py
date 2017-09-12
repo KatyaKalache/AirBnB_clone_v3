@@ -82,4 +82,10 @@ class FileStorage:
         """
         Retrieves object based on class name and ID
         """
-        print(self.all(cls).get(id))
+        return (self.all(cls).get(id))
+
+    def count(self, cls=None):
+        """
+        count the number of objects in storage
+        """
+        return (len(self.all(cls)))
