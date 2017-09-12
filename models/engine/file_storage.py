@@ -94,7 +94,13 @@ class FileStorage:
         """
         Retrieves object based on class name and ID
         """
-        return (self.all(cls).get(id))
+        class_obj = self.all(cls)
+        obj_str = str(cls) + "." + str(id)
+       
+        try:
+            return (class_obj[obj_str])
+        except:
+            return None 
 
     def count(self, cls=None):
         """
