@@ -82,8 +82,6 @@ class FileStorage:
         """Retrieves object based on class name and ID"""
         class_obj = self.all(cls)
         obj_str = str(cls) + "." + str(id)
-
-        print("docstring test: {}".format(self.all.__doc__))
         try:
             return (class_obj[obj_str])
         except:
