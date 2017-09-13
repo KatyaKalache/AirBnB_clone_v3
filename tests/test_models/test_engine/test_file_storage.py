@@ -70,10 +70,10 @@ class TestFileStorageDocs(unittest.TestCase):
 
     def test_doc_delete(self):
         """... documentation for reload function"""
-        expected = ("Deletes obj from __objects if it's inside") 
+        expected = ("Deletes obj from __objects if it's inside")
         actual = FileStorage.delete.__doc__
         self.assertEqual(expected, actual)
-    
+
     def test_doc_get(self):
         """... documentation for get function"""
         expected = ("Retrieves object based on class name and ID")
@@ -85,6 +85,7 @@ class TestFileStorageDocs(unittest.TestCase):
         expected = "Count the number of objects in storage"""
         actual = FileStorage.count.__doc__
         self.assertEqual(expected, actual)
+
 
 @unittest.skipIf(storage_type == 'db', 'skip if environ is db')
 class TestBmFsInstances(unittest.TestCase):

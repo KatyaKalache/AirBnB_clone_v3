@@ -83,11 +83,11 @@ class FileStorage:
         class_obj = self.all(cls)
         obj_str = str(cls) + "." + str(id)
 
-        print("docstring test: {}".format(self.all.__doc__)) 
+        print("docstring test: {}".format(self.all.__doc__))
         try:
             return (class_obj[obj_str])
         except:
-            return None 
+            return None
 
     def count(self, cls=None):
         """Count the number of objects in storage"""

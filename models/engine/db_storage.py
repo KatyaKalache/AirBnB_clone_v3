@@ -67,6 +67,7 @@ class DBStorage:
         Adds objects to current database session
         """
         self.__session.add(obj)
+
     def all(self, cls=None):
         """
         Returns a dictionary of all objects
