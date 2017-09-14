@@ -52,6 +52,7 @@ def delete_state(state_id):
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def add_state():
+    """Creates a State object"""
     state = request.get_json()
 
     if state is None:
@@ -61,8 +62,7 @@ def add_state():
         state['name']
     except:
         return (jsonify("Missing name"), 400)
-
-    data = State(**state)
+    data = State(**state)  # unpack dictionary
     data.save()
 
     return (jsonify(data.to_json()), 201)
