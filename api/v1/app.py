@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""returns a JSON-formatted 404 status code response"""
 from flask import Flask, Blueprint, jsonify
 from models import storage
 from api.v1.views import app_views

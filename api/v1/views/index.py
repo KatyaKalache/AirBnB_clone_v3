@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""retrieves the number of each objects"""
 from api.v1.views import app_views
 from flask import Flask, render_template, jsonify
 from models import storage
