@@ -49,6 +49,7 @@ def delete_state(state_id):
         storage.save()
         return jsonify(empty_dict), 200
 
+
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def add_state():
     state = request.get_json()
@@ -61,5 +62,7 @@ def add_state():
     except:
         return (jsonify("Missing name"), 400)
 
-    State.save(**state) 
-    return (jsonify(state), 201)
+    data = State(**state)
+    data.save()
+
+    return (jsonify(data.to_json()), 201)
