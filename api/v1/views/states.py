@@ -21,7 +21,28 @@ def get_state():
 def get_id(state_id):
     """Retrieves a State object"""
     id_list = []
-    for key, value in storage.all("State").items():
-        if (state_id == value.id):
-            id_list.append(value.to_json())
+
+    state = storage.get("State", state_id)
+
+    if state is None:
+        abort(404)
+    else:
+        id_list.append(state.to_json())
     return (jsonify(id_list))
+
+
+@app_views.route('/states/<state_id>',
+                 methods=['DELETE'], strict_slashes=False)
+def delete_state(state_id):
+    """Deletes a State object"""
+    empty_dict = {}
+
+    state = storage.get("State", state_id)
+
+    if state is None:
+        abort(404)
+
+    else:
+        storage.delete(state)
+        storage.save()
+        return jsonify(empty_dict), 200
