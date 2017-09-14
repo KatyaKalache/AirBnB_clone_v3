@@ -99,7 +99,7 @@ class BaseModel:
                 del key
             if (self.__is_serializable(value)):
                 bm_dict[key] = value
-            else:
+            elif (type(value) is datetime):
                 bm_dict[key] = str(value)
         bm_dict['__class__'] = type(self).__name__
         return(bm_dict)
