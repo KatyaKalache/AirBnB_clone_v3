@@ -5,7 +5,7 @@ from models import storage
 from api.v1.views import app_views
 from flask import Flask, render_template, jsonify
 import json
-from models import State
+from models import User
 
 app = Flask(__name__)
 
@@ -15,12 +15,12 @@ def get_users():
     """Retrieves a list of all User objects"""
     all_list = []
     for k, v in storage.all("User").items():
-        all_list.append(value.to_json())
+        all_list.append(v.to_json())
     return (jsonify(all_list))
 
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
-def get_user_by_id():
+def get_user_by_id(user_id):
     """Retrieves a User object using user_id"""
     user = storage.get("User", user_id)
 
@@ -28,7 +28,7 @@ def get_user_by_id():
         abort(404)
 
     else:
-        user = [user.to_json()]
+        user = user.to_json()
     return (jsonify(user))
 
 
@@ -45,10 +45,10 @@ def delete_user(user_id):
     else:
         storage.delete(user)
         storage.save()
-        return jsonify(empty_dict), 200
+        return (jsonify(empty_dict), 200)
 
 
-@app_views.route('/v1/users', methods=['POST'], strict_slashes=False)
+@app_views.route('/users', methods=['POST'], strict_slashes=False)
 def create_user():
     """Creates a User object"""
     req = request.get_json()
@@ -66,7 +66,7 @@ def create_user():
     except:
         return (jsonify("Missing password"), 400)
 
-    data = State(**req)
+    data = User(**req)
     data.save()
 
     return (jsonify(data.to_json()), 201)
