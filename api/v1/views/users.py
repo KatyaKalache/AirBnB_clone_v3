@@ -16,7 +16,7 @@ def get_users():
     all_list = []
     for k, v in storage.all("User").items():
         all_list.append(v.to_json())
-    return (jsonify(all_list))
+    return (jsonify(all_list), 200)
 
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
@@ -29,7 +29,7 @@ def get_user_by_id(user_id):
 
     else:
         user = user.to_json()
-    return (jsonify(user))
+    return (jsonify(user), 200)
 
 
 @app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
