@@ -28,7 +28,7 @@ def get_id(state_id):
     if state is None:
         abort(404)
     else:
-        state = [state.to_json()]
+        state = state.to_json()
     return (jsonify(state))
 
 
