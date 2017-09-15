@@ -78,15 +78,16 @@ def create_place(city_id):
     except:
         return (jsonify("Missing user_id"), 400)
 
-    try:
-        req['name']
-    except:
-        return (jsonify("Missing name"), 400)
-
     user = storage.get("User", req['user_id'])
 
     if user is None:
         abort(404)
+
+    try:
+        req['name']
+
+    except:
+        return (jsonify("Missing name"), 400)
 
     req['city_id'] = city_id
     user_data = User(**req)
