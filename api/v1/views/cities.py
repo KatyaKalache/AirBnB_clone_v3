@@ -10,13 +10,13 @@ from models import State, City
 app = Flask(__name__)
 
 
-@app_views.route('/states/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/all', methods=['GET'], strict_slashes=False)
 def all_cities():
-    """Retrieves list of all City objects"""
+    """Retrieves list of all objects"""
 
     all_list = []
 
-    for k, v in storage.all("City").items():
+    for k, v in storage.all().items():
         all_list.append(v.to_json())
     return (jsonify(all_list))
 
@@ -97,6 +97,7 @@ def add_city(state_id):
 
     city_data.save()
     return (jsonify(city_data.to_json()), 201)
+
 
 @app_views.route('/cities/<city_id>', methods=['PUT'],
                  strict_slashes=False)
