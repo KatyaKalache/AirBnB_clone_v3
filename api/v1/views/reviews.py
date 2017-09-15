@@ -27,7 +27,7 @@ def reviews_by_place(place_id):
         if review['place_id'] == place.id:
             review_list.append(review)
 
-    return (jsonify(review_list))
+    return (jsonify(review_list), 200)
 
 
 @app_views.route('/reviews/<review_id>', methods=['GET'],
@@ -55,7 +55,7 @@ def delete_review(review_id):
     else:
         storage.delete(review)
         storage.save()
-        return jsonify(empty_dict), 200
+        return (jsonify(empty_dict), 200)
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['POST'],
@@ -80,7 +80,7 @@ def create_review(place_id):
     try:
         req['text']
     except:
-        return (jsonify("Missing text"))
+        return (jsonify("Missing text"), 400)
 
     req['place_id'] = place_id
     review_data = Review(**req)
