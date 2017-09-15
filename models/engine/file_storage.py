@@ -11,7 +11,7 @@ to_json = base_model.BaseModel.to_json
 
 
 class FileStorage:
-    """handles long term storage of all class instances"""
+    """Handles long term storage of all class instances"""
     CNC = {
         'BaseModel': base_model.BaseModel,
         'Amenity': amenity.Amenity,
@@ -29,7 +29,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """returns private attribute: __objects"""
+        """Returns private attribute: __objects"""
         if cls:
             objects_dict = {}
             for class_id, obj in FileStorage.__objects.items():
@@ -39,12 +39,12 @@ class FileStorage:
         return FileStorage.__objects
 
     def new(self, obj):
-        """sets / updates in __objects the obj with key <obj class name>.id"""
+        """Sets / updates in __objects the obj with key <obj class name>.id"""
         bm_id = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[bm_id] = obj
 
     def save(self):
-        """serializes __objects to the JSON file (path: __file_path)"""
+        """Serializes __objects to the JSON file (path: __file_path)"""
         fname = FileStorage.__file_path
         d = {}
         for bm_id, bm_obj in FileStorage.__objects.items():
@@ -53,7 +53,7 @@ class FileStorage:
             json.dump(d, f_io)
 
     def reload(self):
-        """if file exists, deserializes JSON file to __objects, else nothing"""
+        """If file exists, deserializes JSON file to __objects, else nothing"""
         fname = FileStorage.__file_path
         FileStorage.__objects = {}
         try:
@@ -66,7 +66,7 @@ class FileStorage:
             FileStorage.__objects[o_id] = FileStorage.CNC[k_cls](**d)
 
     def delete(self, obj=None):
-        """ deletes obj from __objects if it's inside """
+        """Deletes obj from __objects if it's inside"""
         try:
             del __objects[obj]
         except:
@@ -74,6 +74,19 @@ class FileStorage:
 
     def close(self):
         """
-            calls the reload() method for deserialization from JSON to objects
+        Calls the reload() method for deserialization from JSON to objects
         """
         self.reload()
+
+    def get(self, cls, id):
+        """Retrieves object based on class name and ID"""
+        class_obj = self.all(cls)
+        obj_str = str(cls) + "." + str(id)
+        try:
+            return (class_obj[obj_str])
+        except:
+            return None
+
+    def count(self, cls=None):
+        """Count the number of objects in storage"""
+        return (len(self.all(cls)))

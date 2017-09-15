@@ -38,34 +38,52 @@ class TestFileStorageDocs(unittest.TestCase):
 
     def test_doc_class(self):
         """... documentation for the class"""
-        expected = 'handles long term storage of all class instances'
+        expected = 'Handles long term storage of all class instances'
         actual = FileStorage.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_all(self):
         """... documentation for all function"""
-        expected = 'returns private attribute: __objects'
+        expected = 'Returns private attribute: __objects'
         actual = FileStorage.all.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_new(self):
         """... documentation for new function"""
-        expected = ("sets / updates in __objects the obj with key <obj class "
+        expected = ("Sets / updates in __objects the obj with key <obj class "
                     "name>.id")
         actual = FileStorage.new.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_save(self):
         """... documentation for save function"""
-        expected = 'serializes __objects to the JSON file (path: __file_path)'
+        expected = 'Serializes __objects to the JSON file (path: __file_path)'
         actual = FileStorage.save.__doc__
         self.assertEqual(expected, actual)
 
     def test_doc_reload(self):
         """... documentation for reload function"""
-        expected = ("if file exists, deserializes JSON file to __objects, "
+        expected = ("If file exists, deserializes JSON file to __objects, "
                     "else nothing")
         actual = FileStorage.reload.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_delete(self):
+        """... documentation for reload function"""
+        expected = ("Deletes obj from __objects if it's inside")
+        actual = FileStorage.delete.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_get(self):
+        """... documentation for get function"""
+        expected = ("Retrieves object based on class name and ID")
+        actual = FileStorage.get.__doc__
+        self.assertEqual(expected, actual)
+
+    def test_doc_count(self):
+        """... documentation for count function"""
+        expected = "Count the number of objects in storage"""
+        actual = FileStorage.count.__doc__
         self.assertEqual(expected, actual)
 
 
