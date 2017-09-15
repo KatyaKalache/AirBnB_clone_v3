@@ -9,7 +9,8 @@ import requests
 app = Flask(__name__)
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['GET'], strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
+                 strict_slashes=False)
 def reviews_by_place(place_id):
     """Retrieves the list of all Review objects of a Place"""
     all_list = []
