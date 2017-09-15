@@ -40,7 +40,7 @@ def cities_by_state(state_id):
         if city['state_id'] == state_id:
             city_list.append(city)
 
-    return (jsonify(city_list))
+    return (jsonify(city_list), 200)
 
 
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
@@ -51,7 +51,7 @@ def get_city(city_id):
     if city is None:
         abort(404)
 
-    return (jsonify(city.to_json()))
+    return (jsonify(city.to_json()), 200)
 
 
 @app_views.route('/cities/<city_id>', methods=['DELETE'], strict_slashes=False)
