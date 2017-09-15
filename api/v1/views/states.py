@@ -53,16 +53,36 @@ def delete_state(state_id):
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def add_state():
     """Creates a State object"""
-    state = request.get_json()
+    req = request.get_json()
 
-    if state is None:
+    if req is None:
         return (jsonify("Not a JSON"), 400)
 
     try:
-        state['name']
+        req['name']
     except:
         return (jsonify("Missing name"), 400)
-    data = State(**state)  # unpack dictionary
+    data = State(**req)  # unpack dictionary
     data.save()
 
     return (jsonify(data.to_json()), 201)
+
+
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+def update_state(state_id):
+    """Update a State instance"""
+    state = storage.get("State", state_id)
+    req = request.get_json()
+
+    if state is None:
+        abort(404)
+
+    if req is None:
+        return (jsonify("Not a JSON"), 400)
+
+    for k, v in req.items():
+        setattr(state, k, v)
+
+    state.save()
+
+    return (jsonify(state.to_json()), 200)
