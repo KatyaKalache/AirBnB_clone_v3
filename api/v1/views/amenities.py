@@ -15,7 +15,7 @@ def get_amenities():
     amenities_list = []
     for key, value in storage.all("Amenity").items():
         amenities_list.append(value.to_json())
-    return (jsonify(amenities_list))
+    return (jsonify(amenities_list), 200)
 
 
 @app_views.route('/amenities/<amenity_id>', strict_slashes=False)
@@ -27,7 +27,7 @@ def get_amenity_by_id(amenity_id):
         abort(404)
     else:
         amenity = amenity.to_json()
-    return (jsonify(amenity))
+    return (jsonify(amenity), 200)
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['DELETE'],
