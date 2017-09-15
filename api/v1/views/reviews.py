@@ -9,16 +9,7 @@ import requests
 app = Flask(__name__)
 
 
-@app_views.route('/reviews', strict_slashes=False)
-def get_reviews():
-    """Retrieves the list of all Review objects of a Place"""
-    reviews_list = []
-    for key, value in storage.all("Review").items():
-        reviews_list.append(value.to_json())
-    return (jsonify(reviews_list))
-
-
-@app_views.route('places/<place_id>/reviews', strict_slashes=False)
+@app_views.route('/places/<place_id>/reviews', methods=['GET'], strict_slashes=False)
 def reviews_by_place(place_id):
     """Retrieves the list of all Review objects of a Place"""
     all_list = []
@@ -38,7 +29,8 @@ def reviews_by_place(place_id):
     return (jsonify(review_list))
 
 
-@app_views.route('/amenities/<review_id>', strict_slashes=False)
+@app_views.route('/amenities/<review_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_review_object(review_id):
     """Retrieves a Review object"""
     review = storage.get("Review", review_id)
@@ -49,7 +41,8 @@ def get_review_object(review_id):
     return (jsonify(review.to_json()))
 
 
-@app_views.route('/reviews/<review_id>', strict_slashes=False)
+@app_views.route('/reviews/<review_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_review(review_id):
     """Deletes a review by its id"""
     empty_dict = {}
@@ -86,7 +79,7 @@ def create_review(review_id):
     try:
         req['text']
     except:
-        return (jsonify("Missing text")
+        return (jsonify("Missing text"))
 
     req['user_id'] = user_id
     review_data = Review(**req)
