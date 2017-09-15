@@ -1,18 +1,17 @@
 #!/usr/bin/python3
 """Creates a new view for Place objects"""
 from flask import request, abort
-from models import storage
+from models import storage, Place, State, User
 from api.v1.views import app_views
 from flask import Flask, render_template, jsonify
 import json
-from models import State
 
 app = Flask(__name__)
 
 
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
-def all_places():
+def all_places(city_id):
     """Retrieves list of all Place objects"""
     all_places = []
     result_list = []
@@ -29,7 +28,7 @@ def all_places():
         if place['city_id'] == city_id:
             result_list.append(place)
 
-    return (jsonify(city_list))
+    return (jsonify(result_list))
 
 
 @app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
@@ -104,7 +103,7 @@ def create_place(city_id):
 def update_place(place_id):
     """Updates a Place object"""
     place = storage.get("Place", place_id)
-    req = requests.get_json()
+    req = request.get_json()
 
     if place is None:
         abort(404)
