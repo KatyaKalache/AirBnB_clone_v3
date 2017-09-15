@@ -30,7 +30,7 @@ def reviews_by_place(place_id):
     return (jsonify(review_list))
 
 
-@app_views.route('/amenities/<review_id>', methods=['GET'],
+@app_views.route('/reviews/<review_id>', methods=['GET'],
                  strict_slashes=False)
 def get_review_object(review_id):
     """Retrieves a Review object"""
@@ -60,13 +60,13 @@ def delete_review(review_id):
 
 @app_views.route('/places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
-def create_review(review_id):
+def create_review(place_id):
     """Creates a new review"""
     req = request.get_json()
 
-    review = storage.get("Review", review_id)
+    place = storage.get("Place", place_id)
 
-    if review is None:
+    if place is None:
         abort(404)
 
     if req is None:
@@ -82,7 +82,7 @@ def create_review(review_id):
     except:
         return (jsonify("Missing text"))
 
-    req['user_id'] = user_id
+    req['place_id'] = place_id
     review_data = Review(**req)
 
     for key, value in req.items():
