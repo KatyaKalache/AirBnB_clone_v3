@@ -39,7 +39,7 @@ def get_review_object(review_id):
     if review is None:
         abort(404)
 
-    return (jsonify(review.to_json()))
+    return (jsonify(review.to_json()), 200)
 
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
