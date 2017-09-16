@@ -65,12 +65,8 @@ def create_review(place_id):
     req = request.get_json()
 
     place = storage.get("Place", place_id)
-    user = storage.get("User", user_id)
 
     if place is None:
-        abort(404)
-
-    if user is None:
         abort(404)
 
     if req is None:
